@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  plugins.competitest = {
+    enable = true;
+  };
+}
