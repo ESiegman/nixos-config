@@ -12,12 +12,7 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
-    stylix = "github:danth/stylix";
-
-    nix-matlab = {
-      url = "github:doronbehar/nix-matlab";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    stylix.url = "github:danth/stylix";
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -25,7 +20,7 @@
     };
   };
 
-  output = { self, nixpkgs, nix-matlab, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -34,19 +29,17 @@
           allowUnfree = true;
         };
       };
-      flake-overlays = [ nix-matlab.overlay ];
     in
     {
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-        extraSpecialArgs = { inherit inputs system; };
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         modules = [
-          (import ./configuration.nix
-            inputs.home-manager.nixosModules.default
-            inputs.stylix.nixosModules.stylix
-            inputs.homeManagerModules.nixvim
-            flake-overlays
-          )
+          ./configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+          inputs.stylix.nixosModules.stylix
+          inputs.nixvim.nixosModules.nixvim
         ];
+        specialArgs = { inherit inputs system; };
       };
     };
 }

@@ -1,11 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs = {
     zsh = {
       enable = true;
-      autosuggestion = true;
+      autosuggestion.enable = true;
       enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      historySubstringSearch.enable = true;
       autocd = true;
       dotDir = ".config/zsh";
 
@@ -15,34 +17,16 @@
         teams = "teams-for-linux";
         discord = "vesktop";
         cat = "bat";
-        buildsys = "sudo nixos-rebuild switch --flake /etc/nixos#";
+        buildsys = "sudo nixos-rebuild switch --flake .#nixos --impure";
         fastfetch = "fastfetch --logo ~/.config/fastfetch/fastfetch.png --logo-height 21";
       };
       initExtraFirst = ''
         export XDG_DATA_HOME="$HOME/.local/share"
         mkdir -p ~/.local/share/applications
         sed 's/^Exec=/&nvidia-offload /' /run/current-system/sw/share/applications/steam.desktop > ~/.local/share/applications/steam.desktop
-
-        # Install external plugins manually if not present
-        function install_plugin {
-          local plugin=$1
-          local repo=$2
-          if [ ! -d "$ZSH/custom/plugins/$plugin" ]; then
-            git clone --depth=1 $repo $ZSH/custom/plugins/$plugin
-          fi
-        }
-
-        install_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions.git"
-        install_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-        install_plugin "zsh-completions" "https://github.com/zsh-users/zsh-completions.git"
-        install_plugin "zsh-history-substring-search" "https://github.com/zsh-users/zsh-history-substring-search.git"
-        install_plugin "you-should-use" "https://github.com/MichaelAquilina/zsh-you-should-use.git"
-        install_plugin "fzf-tab" "https://github.com/Aloxaf/fzf-tab.git"
-        install_plugin "alias-tips" "https://github.com/djui/alias-tips.git"
-        install_plugin "zsh-z" "https://github.com/agkozak/zsh-z.git"
-
       '';
       initExtra = ''
+        source ~/.p10k.zsh
         # Function to connect/disconnect to VPN
         function vpn {
           if sudo wg show wgnord 2>/dev/null | grep -q 'interface: wgnord'; then
@@ -88,33 +72,31 @@
           cd ~/MATLAB/bin
           ./matlab
         }
-        fastfetch
+
+        # Function to setup and/or enter virtual Python environment
+        function virt_env {
+          if [[ -n "$VIRTUAL_ENV" ]]; then
+            deactivate
+          else
+            if [ ! -d "./venv" ]; then
+              python -m venv venv
+            fi
+            source ./venv/bin/activate
+          fi
+        }
+
+        fastfetch --logo ~/.config/fastfetch/fastfetch.png --logo-height 21
       '';
-    };
-    oh-my-zsh = {
-      enable = true;
-      theme = "powerlevel10k/powerlevel10k";
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "git"
+          "sudo"
+        ];
+      };
       plugins = [
-        "git"
-        "zsh-autosuggestions"
-        "zsh-syntax-highlighting"
-        "zsh-completions"
-        "zsh-history-substring-search"
-        "you-should-use"
-        "fzf-tab"
-        "alias-tips"
-        "zsh-z"
+        {name = "powerlevel10k";src = pkgs.zsh-powerlevel10k;file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";}
       ];
-    };
-    eza = {
-      enable = true;
-      icons = true;
-    };
-    fzf.enable = true;
-    bat.enable = true;
-    fd = {
-      enable = true;
-      hidden = true;
     };
   };
 }
