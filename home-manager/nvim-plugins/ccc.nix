@@ -1,7 +1,0 @@
-{ ... }:
-
-{
-    plugins.ccc = {
-        enable = true;
-    };
-}

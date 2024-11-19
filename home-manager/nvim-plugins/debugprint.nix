@@ -1,7 +1,0 @@
-{ ... }:
-
-{
-  plugins.debugprint = {
-    enable = true;
-  };
-}
