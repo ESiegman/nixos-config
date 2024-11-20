@@ -15,7 +15,8 @@
       xkb.layout = "us";
       videoDrivers = [ "modesetting" "nvidia" ];
     };
-    displayManager.sddm.enable = true;
+    gvfs.enable = true;
+    tumbler.enable = true;
   };
 
   xdg.portal = {
@@ -53,9 +54,21 @@
       wlogout
       brightnessctl
       hyprshot
+      playerctl
     ];
   };
-
+  
+  programs = {
+    xfconf.enable = true;
+  thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-media-tags-plugin
+      thunar-volman
+    ];
+  };
+};
   time.timeZone = "America/New_York";
 }
 

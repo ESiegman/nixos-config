@@ -11,7 +11,6 @@
     python3
     nodejs
     typescript
-    libstdc++
     nixpkgs-fmt
     black
     isort

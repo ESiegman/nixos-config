@@ -7,7 +7,6 @@
     ueberzug
     zip
     unzip
-    dolphin
     power-profiles-daemon
 
     obs-studio
