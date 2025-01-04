@@ -1,0 +1,56 @@
+/**
+ * @name custom
+ * @author Gibbu#1211 (modified by ESiegman)
+ * @version 2.0.0
+ * @description Display your picture of choice with adjustable blur and brightness.
+ * @source https://github.com/DiscordStyles/FrostedGlass
+ * @invite ZHthyCw
+ * @donate https://paypal.me/IanRGibson
+ * @website https://gibbu.dev
+ * @authorId 174868361040232448
+ * @BDEditor Frosted Glass
+*/
+
+@import url('https://discordstyles.github.io/FrostedGlass/dist/FrostedGlass.css');
+@import url('https://discordstyles.github.io/HorizontalServerList/dist/HorizontalServerList.css');
+@import url('https://nyri4.github.io/Discolored/main.css');
+@import url('https://discordstyles.github.io/Addons/windows-titlebar.css');
+
+:root {
+  --background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp12207425.png&f=1&nofb=1&ipt=58233c86c14edd959b16ad90698609d6b3ac5de1d9f66a399a91514e97d8fda4&ipo=images');
+  --background-image-blur: 0px;
+  --background-image-size: cover;
+  --background-image-position: center;
+  --popout-image: var(--background-image);
+  --popout-image-blur: 0px;
+  --popout-image-size: cover;
+  --popout-image-position: center;
+  --overlay-image: var(--background-image);
+  --overlay-image-blur: 0px;
+  --overlay-image-size: cover;
+  --overlay-image-position: center;
+  --home-button-image: url('https://c4.wallpaperflare.com/wallpaper/890/882/387/fate-apocrypha-fate-series-fgo-anime-boys-femboy-hd-wallpaper-preview.jpg');
+  --home-button-size: 100%;
+  --home-button-position: top center;
+  --serverlist-brightness: 0.82;
+  --left-brightness: 0.82;
+  --middle-brightness: 0.6;
+  --right-brightness: 0.1;
+  --overlay-brightness: 0.8;
+  --gradient-primary: 112,65,194;
+  --gradient-secondary: 63,81,181;
+  --link-colour: #00b0f4;
+  --scrollbar-colour: rgb(30,126,202,1);
+  --gradient-direction: 316deg;
+  --tint-colour: 255,51,159;
+  --tint-brightness: 0.18;
+  --font: Hack Nerd Font Mono;
+  --window-padding: 0px;
+  --window-roundness: 0px;
+  --update-notice-1: none;
+  --HSL-server-icon-size: 45px;
+  --HSL-server-spacing: 10px;
+}
+
+/* Any custom CSS below here */
+
