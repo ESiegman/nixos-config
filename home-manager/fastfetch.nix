@@ -17,7 +17,7 @@
       modules = [
         {
           type = "kernel";
-          key = "  NixOS";
+          key = "  NixOS   ";
           keyColor = "magenta";
         }
         {
@@ -26,7 +26,7 @@
         }
         {
           type = "shell";
-          key = "  Shell";
+          key = "  Shell   ";
           keyColor = "green";
         }
         {
@@ -36,7 +36,7 @@
         }
         {
           type = "terminalfont";
-          key = "  Font";
+          key = "  Font    ";
           keyColor = "green";
         }
         {
@@ -46,12 +46,12 @@
         }
         {
           type = "de";
-          key = " 󰍹  DE";
+          key = " 󰍹 DE      ";
           keyColor = "green";
         }
         {
           type = "wm";
-          key = " 󰧨  WM";
+          key = " 󰧨 WM      ";
           keyColor = "green";
         }
         {
@@ -64,27 +64,27 @@
         }
         {
           type = "display";
-          key = "   Display";
+          key = "  Display ";
           keyColor = "cyan";
         }
         {
           type = "cpu";
-          key = "  CPU";
+          key = "  CPU     ";
           keyColor = "cyan";
         }
         {
           type = "gpu";
-          key = "   GPU";
+          key = "  GPU     ";
           keyColor = "cyan";
         }
         {
           type = "memory";
-          key = "   RAM";
+          key = "  RAM     ";
           keyColor = "cyan";
         }
         {
           type = "disk";
-          key = "   Disk";
+          key = "  Disk    ";
           keyColor = "cyan";
         }
         {

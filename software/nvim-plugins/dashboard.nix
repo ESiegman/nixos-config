@@ -49,7 +49,8 @@
             action = "Telescope oldfiles";
             icon = "󰌑  ";
             desc = "Reopen recent file";
-            key = "r";
+            key = " r";
+            key_format = " %s";
           }
           {
             action = "Telescope find_files";

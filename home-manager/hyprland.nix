@@ -3,8 +3,11 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd = {
+      enable = true;
+      variables = ["--all"];
+    };
     xwayland.enable = true;
-    systemd.enable = true;
     settings = {
       general = {
         "gaps_in" = "2";
@@ -70,13 +73,15 @@
         ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
 
         "$mainMod, Q, exec, kitty"
-        "$mainMod, E, exec, dolphin"
+        "$mainMod, E, exec, thunar"
         "$mainMod, F, exec, wofi"
         "$mainMod, L, exec, hyprlock"
         "$mainMod, W, exec, wlogout"
         "$mainMod, B, exec, firefox"
-        "$mainMod, M, exec, spotify"
-        "$mainMod, D, exec, vesktop"
+        "$mainMod SHIFT, B, exec, chromium --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --disable-gpu"
+        "$mainMod, M, exec, spotify --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --disable-gpu"
+        "$mainMod, D, exec, discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --no-sandbox --disable-gpu"
+        "$mainMod, A, exec, /home/eren/scripts/theme/wallpaper.sh"
 
         ", Print, exec, sh -c 'hyprshot -m region output --clipboard-only'"
         "Shift, Print, exec, sh -c 'hyprshot -m window output --clipboard-only'"
@@ -87,12 +92,19 @@
       ];
       monitor = [
         "DP-1, 1920x1080@120, 0x0, 1"
-        "HDMI-A-1, 1920x1080@120, 0x0, 1, mirror, eDP-1"
-        "monitor = eDP-1, 2880x1800@120, 1920x0, 1.8"
+#        "HDMI-A-1, 1920x1080@120, 0x0, 1, mirror, eDP-1"
+        "eDP-1, 2880x1800@120, 1920x0, 1.8"
+        ", preferred, auto, 1"
       ];
       exec-once = [
         "waybar &"
+        "swww-daemon &"
       ];
     };
+    extraConfig = ''
+      xwayland {
+        force_zero_scaling = true
+      }
+    '';
   };
 }

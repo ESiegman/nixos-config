@@ -9,6 +9,7 @@
     cmake
     clang
     python3
+    jre
     nodejs
     typescript
     nixpkgs-fmt
@@ -20,5 +21,6 @@
     stylua
     lua-language-server
     prettierd
+    texlive.combined.scheme-full
   ];  
 }

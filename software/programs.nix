@@ -5,26 +5,41 @@
     cmatrix
     tgpt
     ueberzug
+    ueberzugpp
     zip
     unzip
     power-profiles-daemon
+    swww
+    bind
+    thefuck
+    taskwarrior3
+    nvitop
 
     obs-studio
 
     orca-slicer
     libreoffice
+    freecad
+    zathura
 
     gimp
     vlc
 
     spotify
 
-    vesktop
     zoom
     teams-for-linux
+    pavucontrol
 
     wine
+    samba
+    winetricks
+
+    prismlauncher
+    r2modman
+
+    tor-browser
   ];
 
-  programs.waybar.enable = true;
+  programs.gamemode.enable = true;
 }

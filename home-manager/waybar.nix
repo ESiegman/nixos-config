@@ -25,7 +25,6 @@
       modules-right = [
         "backlight"
         "pulseaudio"
-        "custom/vpn"
         "bluetooth"
         "network"
         "battery"
@@ -52,6 +51,7 @@
       };
       "custom/playerctl" = {
         format = "{}";
+        interval = 1;
         exec = "$HOME/scripts/waybar/media_control.sh 2> /dev/null";
         tooltip = false;
         on-click = "playerctl play-pause";
@@ -95,13 +95,6 @@
             ""
           ];
         };
-      };
-      "custom/vpn" = {
-        format = "{}";
-        exec = "$HOME/scripts/waybar/vpn_status.sh 2> /dev/null";
-        tooltip = false;
-        interval = 1;
-        on-click = "$HOME/scripts/waybar/vpn_status.sh click-left";
       };
       "bluetooth" = {
         format = " {}";
@@ -170,8 +163,7 @@
       #workspaces button,
       #custom-playerctl button,
       #custom-prev button,
-      #custom-next button,
-      #custom-vpn button {
+      #custom-next button {
         background-color: ${base01};
         color: ${base03};
       }
@@ -245,7 +237,6 @@
       }
       #clock,
       #battery,
-      #custom-vpn,
       #tray {
         border-radius: 10px 10px 10px 10px;
       }

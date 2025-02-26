@@ -12,7 +12,7 @@
   programs.nm-applet.enable = true;
   # VPN
   environment.systemPackages = with pkgs; [
-    wgnord
     wireguard-tools
+    networkmanagerapplet
   ];
 }

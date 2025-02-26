@@ -1,15 +1,18 @@
-{ ... }:
+{ inputs, ... }:
 
 {
   imports = [
+    inputs.nixcord.homeManagerModules.nixcord
     ./hyprland.nix
     ./zsh.nix
     ./git.nix
     ./programs.nix
-    ./kitty.zsh
+    ./kitty.nix
     ./fastfetch.nix
     ./waybar.nix
+    ./nixcord.nix
 #    ./hyprlock.nix
+#    ./hypridle.nix
   ];
   home = {
     username = "eren";

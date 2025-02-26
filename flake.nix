@@ -18,6 +18,23 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-matlab = {
+      url = "gitlab:doronbehar/nix-matlab";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixcord = {
+      url = "github:kaylorben/nixcord";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    nixos-grub-themes.url = "github:jeslie0/nixos-grub-themes";
+
+    sddm-sugar-candy-nix = {
+      url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -25,6 +42,10 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
+        overlays = [
+          inputs.nix-matlab.overlay
+          inputs.sddm-sugar-candy-nix.overlays.default
+        ];
         config = {
           allowUnfree = true;
         };
@@ -38,8 +59,10 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix
           inputs.nixvim.nixosModules.nixvim
+          inputs.sddm-sugar-candy-nix.nixosModules.default
+#          inputs.nvf.nixosModules.default
         ];
-        specialArgs = { inherit inputs system; };
+        specialArgs = { inherit inputs pkgs system; };
       };
     };
 }

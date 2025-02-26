@@ -1,8 +1,18 @@
-{ pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
+
+let
+  wallpaper = /home/eren/Pictures/wallpapers/sunset.jpg;
+in
 
 {
   boot.loader = {
-    systemd-boot.enable = true;
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+      useOSProber = true;
+      theme = inputs.nixos-grub-themes.packages.${pkgs.system}.hyperfluent;
+    };
     efi.canTouchEfiVariables = true;
   };
   systemd.services.systemd-modules-load.enable = true;
@@ -14,6 +24,21 @@
       enable = true;
       xkb.layout = "us";
       videoDrivers = [ "modesetting" "nvidia" ];
+    };
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+      sugarCandyNix = {
+        enable = true;
+        settings = {
+          Background = lib.cleanSource wallpaper;
+          ScreenWidth = 1920;
+          ScreenHeight = 1080;
+          FormPosition = "left";
+          HaveFormBackground = true;
+          PartialBlur = true;
+        };
+      };
     };
     gvfs.enable = true;
     tumbler.enable = true;
@@ -36,7 +61,10 @@
     };
   };
 
-  security.polkit.enable = true;
+  security = {
+    pam.services.hyprlock = {};
+    polkit.enable = true;
+  };
 
   environment = {
     variables.XDG_RUNTIME_DIR = "/run/user/1000";
@@ -55,20 +83,23 @@
       brightnessctl
       hyprshot
       playerctl
+      mesa-demos
+      glxinfo
     ];
   };
   
   programs = {
+    hyprland.enable = true;
     xfconf.enable = true;
-  thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-media-tags-plugin
-      thunar-volman
-    ];
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-media-tags-plugin
+        thunar-volman
+      ];
+    };
   };
-};
   time.timeZone = "America/New_York";
 }
 

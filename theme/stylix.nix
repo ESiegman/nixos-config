@@ -1,13 +1,8 @@
 { pkgs, ... }:
 
-let
-  wallpaper = /home/eren/Pictures/wallpapers/cute.jpg;
-in
-
 {
   stylix = {
     enable = true;
-    image = wallpaper;
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";

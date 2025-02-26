@@ -36,11 +36,18 @@
         };
         # NVIDIA Prime Sync better performance than Prime Offload, but more unstable 
         # and more power consumption
-        sync.enable = false;
+#        sync.enable = true;
 
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
     };
   };
+
+  boot = {
+    initrd.kernelModules = [ "nvidia" ];
+    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
 }

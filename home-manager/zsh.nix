@@ -14,16 +14,22 @@
       shellAliases = {
         grep = "grep --color=auto";
         chrome = "chromium";
-        teams = "teams-for-linux";
-        discord = "vesktop";
+        teams = "teams-for-linux --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --no-sandbox --disable-gpu";
+        discord = "discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --no-sandbox --disable-gpu";
+        modman = "r2modman --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --no-sandbox --disable-gpu";
         cat = "bat";
         buildsys = "sudo nixos-rebuild switch --flake .#nixos --impure";
         fastfetch = "fastfetch --logo ~/.config/fastfetch/fastfetch.png --logo-height 21";
+        matlab = "nvidia matlab";
+        latex = "latexmk -pdf -f";
+        eza = "eza -T -L 2";
+        ls = "eza -T -L 2";
       };
       initExtraFirst = ''
         export XDG_DATA_HOME="$HOME/.local/share"
         mkdir -p ~/.local/share/applications
         sed 's/^Exec=/&nvidia-offload /' /run/current-system/sw/share/applications/steam.desktop > ~/.local/share/applications/steam.desktop
+        eval $(thefuck --alias)
       '';
       initExtra = ''
         source ~/.p10k.zsh
@@ -57,20 +63,10 @@
           local location="$directory/$script_file"
                 
           cp "$location" ~/MATLAB
-          cd ~/MATLAB/bin
-          nix run gitlab:doronbehar/nix-matlab#matlab-shell
-          ./matlab -nosplash -nodesktop -r "run('$script_file');"
-            cd "$directory"
+          nvidia matlab -nosplash -nodesktop -r "run('$script_file');"
         }
         function run-matlab-cli {
-          nix run gitlab:doronbehar/nix-matlab#matlab-shell
-          cd ~/MATLAB/bin
-          ./matlab -nodisplay -nosplash -nodesktop
-        }
-        function matlab {
-          nix run gitlab:doronbehar/nix-matlab#matlab-shell
-          cd ~/MATLAB/bin
-          ./matlab
+          nvidia matlab -nodisplay -nosplash -nodesktop
         }
 
         # Function to setup and/or enter virtual Python environment
@@ -83,6 +79,15 @@
             fi
             source ./venv/bin/activate
           fi
+        }
+
+        # Function to offload to NVIDIA GPU
+        function nvidia {
+          export __NV_PRIME_RENDER_OFFLOAD=1
+          export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+          export __GLX_VENDOR_LIBRARY_NAME=nvidia
+          export __VK_LAYER_NV_optimus=NVIDIA_only
+          DRI_PRIME=1 "$@"
         }
 
         fastfetch --logo ~/.config/fastfetch/fastfetch.png --logo-height 21

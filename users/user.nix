@@ -34,6 +34,8 @@
       commands = [
         { command = "/run/current-system/sw/bin/wgnord"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/wg"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/nixos-rebuild"; options = [ "NOPASSWD" ]; }
+        { command = "/usr/bin/sed"; options = [ "NOPASSWD" ]; }
       ];
     }
   ];
